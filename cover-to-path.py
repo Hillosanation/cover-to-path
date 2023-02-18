@@ -16,7 +16,7 @@ for row in csv.reader(open(args.csv_path, 'r')):
 # print(InputCSV)
 
 #write fumens to a file to prevent command length limits
-open(r"output\temp_gluedfumens.txt", "w").write("\n".join(InputCSV[0][1:]))
+open(r".\output\temp_gluedfumens.txt", "w").write("\n".join(InputCSV[0][1:]))
 
 os.system(fr'node {args.unglued_fumen_script_path} --fp ".\output\temp_gluedfumens.txt" --op ".\output\temp_ungluedfumens.txt"') #calls unglueFumen.js
 

@@ -2,11 +2,10 @@
 import csv
 import sys
 import argparse
-import os
+from py_fumen_util import assemble
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--csv-path", default=r".\output\cover.csv", help=r"Defaults to output\cover.csv.")
-parser.add_argument("--unglued-fumen-script-path", default=r".\unglueFumen.js", help=r"Defaults to .\unglueFumen.js. Note this depends on Hillosanation/GluingFumens instead of Marfung37/GluingFumens.")
 parser.add_argument("--output-file-path", default="", help="Appends '_to_path' to the input csv file by default. Note to keep the .csv extenstion.")
 args = parser.parse_args(sys.argv[1:])
 
@@ -15,13 +14,8 @@ for row in csv.reader(open(args.csv_path, 'r')):
     InputCSV.append(row)
 # print(InputCSV)
 
-#write fumens to a file to prevent command length limits
-open(r"output\temp_gluedfumens.txt", "w").write("\n".join(InputCSV[0][1:]))
-
-os.system(fr'node {args.unglued_fumen_script_path} --fp ".\output\temp_gluedfumens.txt" --op ".\output\temp_ungluedfumens.txt"') #calls unglueFumen.js
-
-ungluedRow = open(r"output\temp_ungluedfumens.txt", "r").read().split("\n")
-# print(ungluedRow)
+ungluedRow = assemble(InputCSV[0][1:])
+print(ungluedRow)
 
 OutputCSV = []
 OutputCSV.append(["pattern", "solutionCount", "solutions", "unusedMinos", "fumens"]) #QoL, not read by strict-minimal

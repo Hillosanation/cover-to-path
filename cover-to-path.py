@@ -15,7 +15,7 @@ for row in csv.reader(open(args.csv_path, 'r')):
 # print(InputCSV)
 
 ungluedRow = assemble(InputCSV[0][1:])
-print(ungluedRow)
+# print(ungluedRow)
 
 OutputCSV = []
 OutputCSV.append(["pattern", "solutionCount", "solutions", "unusedMinos", "fumens"]) #QoL, not read by strict-minimal
